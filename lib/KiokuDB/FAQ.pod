@@ -1,0 +1,20 @@
+=pod
+
+=head1 NAME
+
+KiokuDB::FAQ - Common questions when working with KiokuDB
+
+=head1 When stashing an object, how can I tell the KiokuDB NOT to store an attribute? 
+
+Assign the trait L<KiokuDB::Meta::Attribute::DoNotSerialize> to the attribute
+
+    has a_core_attribute => ( is => 'rw', isa => 'Str', ... );
+
+    has a_derived_attribute => ( is => 'ro', lazy_build => 1, ..., traits => [qw( KiokuDB::DoNotSerialize )] );
+    sub _build_a_derived_attribute {
+        ...
+    }
+
+Currently, you can only tell KiokuDB which traits to exclude, not which traits you want to include (that is, there is no ::DoSerialize trait)
+
+=cut
